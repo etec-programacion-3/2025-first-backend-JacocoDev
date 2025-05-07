@@ -1,0 +1,44 @@
+### GET /libros - Listar todos los libros
+GET http://localhost:5000/libros
+Content-Type: application/json
+
+###
+
+### GET /libros/{id} - Obtener un libro específico
+GET http://localhost:5000/libros/1
+Content-Type: application/json
+
+###
+
+### POST /libros - Crear un nuevo libro
+POST http://localhost:5000/libros
+Content-Type: application/json
+
+{
+  "title": "Cien años de soledad",
+  "author": "Gabriel García Márquez",
+  "genre": "Realismo mágico",
+  "published_date": "1967-05-30"
+}
+
+###
+
+### PUT /libros/{id} - Actualizar un libro
+PUT http://localhost:5000/libros/1
+Content-Type: application/json
+
+{
+  "genre": "Novela latinoamericana"
+}
+
+###
+
+### DELETE /libros/{id} - Eliminar un libro
+DELETE http://localhost:5000/libros/1
+Content-Type: application/json
+
+###
+
+### GET /libros/buscar - Buscar libros por parámetros
+GET http://localhost:5000/libros/buscar?titulo=cien&autor=marquez&categoria=realismo
+Content-Type: application/json
