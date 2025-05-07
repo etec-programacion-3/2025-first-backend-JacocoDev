@@ -42,3 +42,15 @@ Content-Type: application/json
 ### GET /libros/buscar - Buscar libros por parámetros
 GET http://localhost:5000/libros/buscar?titulo=cien&autor=marquez&categoria=realismo
 Content-Type: application/json
+
+
+
+### POST /libros - Intentar crear libro inválido (falta autor)
+POST http://localhost:5000/libros
+Content-Type: application/json
+
+{
+  "title": "Libro sin autor",
+  "genre": "Drama",
+  "published_date": "2020-01-01"
+}

@@ -1,5 +1,6 @@
 from app import ma
 from .models import Book
+from marshmallow import fields, validate, ValidationError
 
 class BookSchema(ma.SQLAlchemySchema):
     class Meta:
@@ -7,10 +8,10 @@ class BookSchema(ma.SQLAlchemySchema):
         load_instance = True
 
     id = ma.auto_field()
-    title = ma.auto_field()
-    author = ma.auto_field()
-    genre = ma.auto_field()
-    published_date = ma.auto_field()
+    title = fields.String(required=True, validate=validate.Length(min=1, max=100))
+    author = fields.String(required=True, validate=validate.Length(min=1, max=100))
+    genre = fields.String(required=True, validate=validate.Length(min=1, max=50))
+    published_date = fields.Date(required=True)
 
 book_schema = BookSchema()
 books_schema = BookSchema(many=True)
