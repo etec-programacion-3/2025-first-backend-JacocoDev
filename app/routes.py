@@ -5,24 +5,24 @@ from . import db
 
 libro_bp = Blueprint('libro', __name__)
 
-@libro_bp.route('/')
+@libro_bp.route('/') # Endpoint base para verificar que la API funciona.
 def index():
     return "API Biblioteca funcionando"
 
-@libro_bp.route('/libros', methods=['GET'])
+@libro_bp.route('/libros', methods=['GET']) # Lista todos los libros en la base de datos.
 def get_books():
     libros = Book.query.all()
     result = books_schema.dump(libros)
-    return jsonify(result)
+    return jsonify(result) # Devuelve un JSON con una lista de libros. #
 
-@libro_bp.route('/libros/<int:id>', methods=['GET'])
+@libro_bp.route('/libros/<int:id>', methods=['GET']) # Obtiene los datos de un libro específico por su ID. #
 def get_book(id):
     book = Book.query.get(id)
     if not book:
         return jsonify({'message': 'Libro no encontrado'}), 404
-    return book_schema.jsonify(book)
+    return book_schema.jsonify(book) # Devuelve un JSON con los datos del libro o error 404 si no se encuentra. #
 
-@libro_bp.route('/libros', methods=['POST'])
+@libro_bp.route('/libros', methods=['POST']) # Crea un nuevo libro con los datos enviados en formato JSON. #
 def create_book():
     json_data = request.get_json()
     if not json_data:
@@ -35,9 +35,9 @@ def create_book():
 
     db.session.add(book)
     db.session.commit()
-    return book_schema.jsonify(book), 201
+    return book_schema.jsonify(book), 201 # Devuelve el libro creado y código 201, o error 400 si falta algún campo. #
 
-@libro_bp.route('/libros/<int:id>', methods=['PUT'])
+@libro_bp.route('/libros/<int:id>', methods=['PUT']) # Actualiza los datos de un libro existente. #
 def update_book(id):
     book = Book.query.get(id)
     if not book:
@@ -53,9 +53,9 @@ def update_book(id):
         return jsonify({'error': str(e)}), 400
 
     db.session.commit()
-    return book_schema.jsonify(updated_book)
+    return book_schema.jsonify(updated_book) # Devuelve el libro actualizado o error si no se encuentra o hay datos inválidos. #
 
-@libro_bp.route('/libros/<int:id>', methods=['DELETE'])
+@libro_bp.route('/libros/<int:id>', methods=['DELETE']) # Elimina un libro por su ID. #
 def delete_book(id):
     book = Book.query.get(id)
     if not book:
@@ -63,9 +63,9 @@ def delete_book(id):
 
     db.session.delete(book)
     db.session.commit()
-    return jsonify({'message': 'Libro eliminado correctamente'})
+    return jsonify({'message': f'Libro con ID {id} eliminado'}) # Devuelve un mensaje de confirmación. #
 
-@libro_bp.route('/libros/buscar', methods=['GET'])
+@libro_bp.route('/libros/buscar', methods=['GET']) # Busca libros por título, autor o categoría. #
 def search_books():
     titulo = request.args.get('titulo', '', type=str)
     autor = request.args.get('autor', '', type=str)
@@ -81,4 +81,4 @@ def search_books():
         query = query.filter(Book.genre.ilike(f'%{categoria}%'))
 
     libros_filtrados = query.all()
-    return books_schema.jsonify(libros_filtrados)
+    return books_schema.jsonify(libros) # Devuelve un JSON con los libros que coincidan con los filtros. #
