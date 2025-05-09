@@ -90,4 +90,14 @@ def buscar_libros():
         return jsonify({'error': 'Debe proporcionar un parámetro de búsqueda: titulo'}), 400
 
     libros = Book.query.filter(Book.title.ilike(f"%{titulo}%")).all()
-    return jsonify(books_schema.dump(libros))  # Devuelve una lista de libros que coinciden con el título
+    return jsonify(books_schema.dump(libros)) # Devuelve una lista de libros que coinciden con el título
+
+@libro_bp.route('/libros/buscar-categoria', methods=['GET']) # Busca libros por categoria parcial o completo.
+def buscar_por_categoria():
+    categoria = request.args.get('categoria', '', type=str)
+
+    if not categoria:
+        return jsonify({'error': 'Debe proporcionar el parámetro "categoria"'}), 400
+
+    libros = Book.query.filter(Book.genre.ilike(f'%{categoria}%')).all()
+    return books_schema.jsonify(libros) # Devuelve una lista de libros que coinciden con la categoria
