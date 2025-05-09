@@ -55,6 +55,10 @@ Content-Type: application/json
   "published_date": "2020-01-01"
 }
 
-### Buscar libros por título
+### GET /libros/buscar-titulo - Buscar libros por título
 GET http://localhost:5000/libros/buscar-titulo?titulo=1984
 Accept: application/json
+
+### GET /libros/buscar-categoria - Buscar libros por categoría
+GET http://localhost:5000/libros/buscar-categoria?categoria=realismo
+Content-Type: application/json
