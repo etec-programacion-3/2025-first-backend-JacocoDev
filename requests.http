@@ -40,7 +40,7 @@ Content-Type: application/json
 ###
 
 ### GET /libros/buscar - Buscar libros por parámetros
-GET http://localhost:5000/libros/buscar?titulo=cien&autor=marquez&categoria=realismo
+GET http://localhost:5000/libros/buscar?titulo=cien&autor=garcía&categoria=realismo
 Content-Type: application/json
 
 
@@ -54,3 +54,7 @@ Content-Type: application/json
   "genre": "Drama",
   "published_date": "2020-01-01"
 }
+
+### Buscar libros por título
+GET http://localhost:5000/libros/buscar-titulo?titulo=1984
+Accept: application/json
