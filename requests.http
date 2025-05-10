@@ -43,22 +43,22 @@ Content-Type: application/json
 GET http://localhost:5000/libros/buscar?titulo=cien&autor=garcía&categoria=realismo
 Content-Type: application/json
 
-
-
-### POST /libros - Intentar crear libro inválido (falta autor)
-POST http://localhost:5000/libros
-Content-Type: application/json
-
-{
-  "title": "Libro sin autor",
-  "genre": "Drama",
-  "published_date": "2020-01-01"
-}
+###
 
 ### GET /libros/buscar-titulo - Buscar libros por título
 GET http://localhost:5000/libros/buscar-titulo?titulo=1984
 Accept: application/json
 
+###
+
 ### GET /libros/buscar-categoria - Buscar libros por categoría
 GET http://localhost:5000/libros/buscar-categoria?categoria=realismo
 Content-Type: application/json
+
+###
+
+### GET /libros/ordenar - Ordenar libros por título (ascendente)
+GET http://localhost:5000/libros/ordenar?por=title
+Content-Type: application/json
+
+###

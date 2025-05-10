@@ -101,3 +101,13 @@ def buscar_por_categoria():
 
     libros = Book.query.filter(Book.genre.ilike(f'%{categoria}%')).all()
     return books_schema.jsonify(libros) # Devuelve una lista de libros que coinciden con la categoria
+
+@libro_bp.route('/libros/ordenar', methods=['GET']) # Ordena los libros por un campo (por defecto: título) de forma ascendente.
+def ordenar_libros():
+    ordenar_por = request.args.get('por', 'title')  # Por defecto se ordenará por 'title'
+    
+    if ordenar_por not in ['title', 'author', 'published_date']:
+        return jsonify({'error': 'Criterio de ordenamiento no válido'}), 400
+    
+    libros = Book.query.order_by(getattr(Book, ordenar_por).asc()).all()
+    return books_schema.jsonify(libros) # Devuelve los libros ordenados en formato JSON.
