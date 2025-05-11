@@ -18,7 +18,9 @@ Content-Type: application/json
   "title": "Cien años de soledad",
   "author": "Gabriel García Márquez",
   "genre": "Realismo mágico",
-  "published_date": "1967-05-30"
+  "published_date": "1967-05-30",
+  "isbn": "1234567890123",
+  "status": "disponible"
 }
 
 ###
@@ -28,7 +30,7 @@ PUT http://localhost:5000/libros/1
 Content-Type: application/json
 
 {
-  "genre": "Novela latinoamericana"
+  "status": "prestado"
 }
 
 ###

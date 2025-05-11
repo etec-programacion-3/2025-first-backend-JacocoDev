@@ -2,3 +2,4 @@ Flask
 Flask-SQLAlchemy
 Flask-Marshmallow
 marshmallow-sqlalchemy
+Flask-Migrate
